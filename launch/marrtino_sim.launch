@@ -1,0 +1,28 @@
+<launch>
+  <arg name="model" default="$(find marrtino_utilities)/urdf/marrtino.urdf.xacro"/>
+  <arg name="rvizconfig" default="$(find marrtino_utilities)/rviz/sim.rviz"/>
+  <arg name="gui" default="false"/>
+  <arg name="teleop" default="false"/>
+
+  <include file="$(find marrtino_utilities)/launch/gazebo.launch">
+    <arg name="model" value="$(arg model)" />
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+  <rosparam command="load"
+            file="$(find marrtino_utilities)/config/joints.yaml"
+            ns="marrtino_joint_state_controller" />
+  <rosparam command="load"
+            file="$(find marrtino_utilities)/config/diffdrive.yaml"
+            ns="marrtino_diff_drive_controller" />
+
+  <node name="marrtino_controller_spawner" pkg="controller_manager" type="spawner"
+    args="marrtino_joint_state_controller
+          marrtino_diff_drive_controller"/>
+          
+  <node name="sim_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"
+    ns="marrtino_diff_drive_controller"  if="$(arg teleop)"/>
+  
+</launch>

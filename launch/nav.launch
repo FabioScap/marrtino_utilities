@@ -1,0 +1,11 @@
+<launch>
+    <node name="orazio_robot_node" type="orazio_robot_node" pkg="srrg2_orazio_ros"/>
+    <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+    <node name="slam_gmapping" type="slam_gmapping" pkg="gmapping"/>
+    <node name="amcl" type="amcl" pkg="amcl"/>
+    <include file="$(find marrtino_utilities)/launch/move_base.launch"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(find marrtino_utilities)/urdf/marrtino.urdf.xacro" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+</launch>
