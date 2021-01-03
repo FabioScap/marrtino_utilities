@@ -1,0 +1,8 @@
+<launch>
+
+    <arg name="model" default="$(find marrtino_utilities)/urdf/marrtino.urdf.xacro"/>
+    <arg name="rvizconfig" default="$(find marrtino_utilities)/rviz/urdf.rviz" />
+
+    <node type="robot_state_publisher" name="robot_state_publisher" pkg="robot_state_publisher"/>
+
+  </launch>
