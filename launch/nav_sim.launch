@@ -5,13 +5,15 @@
     <include file="$(find marrtino_utilities)/launch/marrtino_sim.launch">
         <arg name="rvizconfig" value="$(find marrtino_utilities)/rviz/nav.rviz" />
     </include>
-    <!--<node name="slam_gmapping" type="slam_gmapping" pkg="gmapping"/>
-    -->
+    <node name="slam_gmapping" type="slam_gmapping" pkg="gmapping"/>
     
+        <!--
         <node name="map_server" type="map_server" pkg="map_server" args="$(find marrtino_utilities)/maps/$(arg map).yaml"/>
         <node name="amcl" type="amcl" pkg="amcl"/>
-    
+        -->
 
 
-    <include file="$(find marrtino_utilities)/launch/move_base.launch"/>
+    <include file="$(find marrtino_utilities)/launch/move_base.launch">
+        <arg name="sim" value="true"/>
+    </include>
 </launch>

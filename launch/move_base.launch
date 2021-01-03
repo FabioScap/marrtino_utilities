@@ -1,6 +1,7 @@
 <launch>
+    <arg name="sim" default="false" />
     <node name="move_base" type="move_base" pkg="move_base">
-        <remap from="/cmd_vel" to="/marrtino_diff_drive_controller/cmd_vel"/>
+        <remap from="/cmd_vel" to="/marrtino_diff_drive_controller/cmd_vel" if="$(arg sim)"/>
         <rosparam file="$(find marrtino_utilities)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
         <rosparam file="$(find marrtino_utilities)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find marrtino_utilities)/config/local_costmap_params.yaml" command="load" />
