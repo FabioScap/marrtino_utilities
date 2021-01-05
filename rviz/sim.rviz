@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /RobotModel1/Status1
         - /TF1
         - /Map1
         - /LaserScan1
@@ -75,6 +76,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         caster_wheel:
           Alpha: 1
           Show Axes: false
@@ -110,13 +116,13 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera:
+          Value: true
         caster_wheel:
           Value: true
         laser:
           Value: true
         left_wheel:
-          Value: true
-        map:
           Value: true
         odom:
           Value: true
@@ -128,18 +134,19 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_footprint:
-              base_link:
-                caster_wheel:
-                  {}
-                laser:
-                  {}
-                left_wheel:
-                  {}
-                right_wheel:
-                  {}
+        odom:
+          base_footprint:
+            base_link:
+              camera:
+                {}
+              caster_wheel:
+                {}
+              laser:
+                {}
+              left_wheel:
+                {}
+              right_wheel:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -186,7 +193,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: map
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -210,25 +217,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.5997090339660645
+      Distance: 0.7240214943885803
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.4785715937614441
-        Y: 0.0035122819244861603
-        Z: 0.8232816457748413
+        X: -0.43860167264938354
+        Y: 0.34587085247039795
+        Z: 0.5339751839637756
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8653972148895264
+      Pitch: 0.47539758682250977
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.153585195541382
+      Yaw: 2.578583002090454
     Saved: ~
 Window Geometry:
   Displays:
