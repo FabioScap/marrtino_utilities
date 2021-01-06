@@ -8,7 +8,7 @@
   <arg name="model" default="$(find marrtino_utilities)/urdf/marrtino.urdf.xacro"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="worlds/willowgarage.world"/>
+    <arg name="world_name" value="$(find marrtino_utilities)/gazebo/worlds/building_tags.world"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>

@@ -3,6 +3,7 @@
   <arg name="rvizconfig" default="$(find marrtino_utilities)/rviz/sim.rviz"/>
   <arg name="gui" default="false"/>
   <arg name="teleop" default="false"/>
+  <arg name="apriltag" default="true"/>
 
   <include file="$(find marrtino_utilities)/launch/gazebo.launch">
     <arg name="model" value="$(arg model)" />
@@ -25,4 +26,10 @@
   <node name="sim_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"
     ns="marrtino_diff_drive_controller"  if="$(arg teleop)"/>
   
+  <include file="$(find apriltag_ros)/launch/continuous_detection.launch" if="$(arg apriltag)">
+    <arg name="camera_name" value="virtual_camera"/>
+    <arg name="image_topic" value="image_proc"/>
+    <arg name="camera_frame" value="camera"/>
+  </include>
+
 </launch>
