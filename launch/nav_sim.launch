@@ -7,12 +7,9 @@
         <arg name="rvizconfig" value="$(find marrtino_utilities)/rviz/nav.rviz" />
         <arg name="gui" value="$(arg gui)"/>
     </include>
-    <node name="slam_gmapping" type="slam_gmapping" pkg="gmapping"/>
-    
-        <!--
-        <node name="map_server" type="map_server" pkg="map_server" args="$(find marrtino_utilities)/maps/$(arg map).yaml"/>
-        <node name="amcl" type="amcl" pkg="amcl"/>
-        -->
+
+    <node name="map_server" type="map_server" pkg="map_server" args="$(find marrtino_utilities)/maps/$(arg map).yaml"/>
+    <node name="amcl" type="amcl" pkg="amcl"/>
 
 
     <include file="$(find marrtino_utilities)/launch/move_base.launch">
