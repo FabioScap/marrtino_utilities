@@ -69,30 +69,6 @@ def forward(d,vel):
     vel_publisher.publish(vel_msg)
     rospy.loginfo("done")
 
-
-# only if d is small
-def tilted_forward(d,tilt,vel):
-    rospy.loginfo("tilted forward {} m at {} m/sec with {} rad/sec tilt".format(d,vel,tilt))
-    rospy.loginfo("forward {} m at {} m/sec".format(d,vel))
-    vel_msg = Twist()
-    vel_msg.linear.x = vel
-    vel_msg.angular.z = tilt
-    t0 = rospy.Time.now().to_sec()
-    while t0<=0:
-        t0 = rospy.Time.now().to_sec()
-    current_pos = 0
-    while(current_pos < d):
-        vel_publisher.publish(vel_msg)
-        t1 = rospy.Time.now().to_sec()
-        current_pos = (vel*(t1-t0))
-        rate.sleep()
-    vel_msg.linear.x = 0
-    vel_msg.angular.z = 0
-    vel_publisher.publish(vel_msg)
-    rospy.loginfo("done")
-
-
-
 def p1():
     rospy.loginfo("starting p1")
     now = rospy.Time.now()
