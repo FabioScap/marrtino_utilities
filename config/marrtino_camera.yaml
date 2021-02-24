@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: marrtino_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [582.124205310083, 0, 328.2067145451674, 0, 580.5368966013701, 206.6720542481614, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.4330837718503233, 0.2558685139618405, 0.006274810967038609, 0.003848988963392046, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [504.2251586914062, 0, 333.7877084499269, 0, 0, 535.2850341796875, 203.7567501208468, 0, 0, 0, 1, 0]
