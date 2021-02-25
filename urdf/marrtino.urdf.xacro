@@ -48,7 +48,7 @@
     </xacro:macro>
 
     <xacro:include filename="marrtino/laser.urdf.xacro"/>
-    <xacro:include filename="marrtino/camera2.urdf.xacro"/>
+    <xacro:include filename="marrtino/camera3.urdf.xacro"/>
 
     <link name="base_footprint"/>
     

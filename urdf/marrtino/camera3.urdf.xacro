@@ -1,0 +1,88 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
+  
+
+
+    <xacro:property name="cam_side" value="0.025"/>
+    <xacro:property name="cam_mass" value="0.025"/>
+    <xacro:property name="cam_v_offset" value="0.03"/>
+
+
+    <link name="camera">
+        <visual>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0"/>
+            </material>
+            <geometry>
+                <box size="${cam_side} ${cam_side} ${cam_side}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${cam_side} ${cam_side} ${cam_side}"/>
+            </geometry>
+        </collision>
+        <xacro:box_inertia m="${cam_mass}" x="${cam_side}" y="${cam_side}" z="${cam_side}"/>
+    </link>
+
+    <joint name="base_link_to_camera" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera"/>
+      <axis xyz="1 0 0"/>
+      <origin xyz="${b_length/2 + cam_side/2} 0 ${cam_v_offset}" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
+    <!-- Gazebo e ROS utilizzano due standard differenti per l'orientamento
+      di telecamere, quindi va aggiunto un altro frame per allinearle correttamente.
+      forse si potrebbe creare un file separato per la camera sul robot reale in modo
+      da ridurre il numero di frames dato che gazevo_camera non serve.
+    -->
+    <link name="gazebo_camera"/>
+
+    <joint name="base_link_to_gazebo_camera" type="fixed">
+      <parent link="base_link"/>
+      <child link="gazebo_camera"/>
+      <axis xyz="1 0 0"/>
+      <origin xyz="${b_length/2 + cam_side/2} 0 ${cam_v_offset}"/>
+    </joint>
+   
+
+
+    <gazebo reference="gazebo_camera">
+        <sensor type="camera" name="camera1">
+          <pose>0 0 0 0 0 0</pose>
+          <update_rate>15.0</update_rate>
+          <camera name="head">
+            <horizontal_fov>1.3962634</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>L8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>300</far>
+            </clip>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.007</stddev>
+            </noise>
+          </camera>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>0.0</updateRate>
+            <cameraName>virtual_camera</cameraName>
+            <imageTopicName>image_proc</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>camera</frameName>
+            <hackBaseline>0.07</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+          </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>
