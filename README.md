@@ -12,4 +12,5 @@ TODO: aggiungere i blocchi condizionali nei file xacro per non caricare i link r
 
 dock.py:
 Per avvicinarsi a 30cm da tag0
+
 rosrun tf static_transform_publisher 0 0 0.30 0 1.5707 -1.5707 tag0 dock_frame 10 
